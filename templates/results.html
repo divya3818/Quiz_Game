@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - QuizMitra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-logo">QuizMitra</a>
+            <div class="nav-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('progress') }}" class="nav-link">Your Progress</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="results-container">
+            <h2>Quiz Results</h2>
+            <div class="score-card">
+                <h3>Your Score: {{ score }}/{{ total }}</h3>
+                <p>Category: {{ category|title }}</p>
+                <p>Percentage: {{ (score/total*100)|round }}%</p>
+                {% if score/total >= 0.8 %}
+                <p class="success-message">Excellent job!</p>
+                {% elif score/total >= 0.6 %}
+                <p class="success-message">Good effort!</p>
+                {% else %}
+                <p class="improve-message">Keep practicing to improve!</p>
+                {% endif %}
+            </div>
+            
+            <div class="actions">
+                <a href="{{ url_for('start_quiz') }}" class="btn-primary">Take Another Quiz</a>
+                <a href="{{ url_for('progress') }}" class="btn-secondary">View Your Progress</a>
+                <a href="{{ url_for('index') }}" class="btn-secondary">Return Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

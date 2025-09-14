@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Progress - QuizMaster</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-logo">QuizMaster</a>
+            <div class="nav-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('progress') }}" class="nav-link">Your Progress</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="progress-container">
+            <h2>Your Quiz Progress</h2>
+            
+            {% if results %}
+            <div class="table-container">
+                <table class="progress-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Category</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                        <tr>
+                            <td>{{ result.Name }}</td>
+                            <td>{{ result.Email }}</td>
+                            <td>{{ result.Category }}</td>
+                            <td>{{ result.Score }}/5</td>
+                            <td>{{ result.Date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="no-results">No quiz results found. Take a quiz to see your progress here!</p>
+            {% endif %}
+            
+            <div class="actions">
+                <a href="{{ url_for('start_quiz') }}" class="btn-primary">Take Another Quiz</a>
+                <a href="{{ url_for('index') }}" class="btn-secondary">Return Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
